@@ -1,9 +1,10 @@
 :root {
-  --bg: #0f1724;
-  --card: #0b1220;
-  --accent: #0ea5ff;
-  --accent-2: #7c3aed;
-  --text: #e6eef8;
+  --bg: #2b022b;
+  --bg2: #3b0538;
+  --card: #2a0720;
+  --accent: #ff6bcb;
+  --accent-2: #ff2d95;
+  --text: #ffeef8;
 }
 * {
   box-sizing: border-box;
@@ -21,7 +22,7 @@ body {
     Roboto,
     Helvetica,
     Arial;
-  background: linear-gradient(180deg, var(--bg) 0%, #071126 100%);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
   color: var(--text);
   display: flex;
   align-items: center;
@@ -94,7 +95,7 @@ button {
 }
 button.primary {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.18);
+  box-shadow: 0 6px 18px rgba(255, 45, 149, 0.18);
 }
 button.danger {
   background: rgba(255, 80, 80, 0.12);
