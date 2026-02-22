@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Bil batteri - iPhone venlig</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="phone">
+    <header>
+      <h1>Batteri & rækkevidde</h1>
+    </header>
+
+    <main>
+      <section id="home" class="view">
+        <label class="field">
+          <span>%</span>
+          <input id="percentInput" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="Fx 82">
+        </label>
+
+        <label class="field">
+          <span>KM</span>
+          <input id="kmInput" type="number" min="0" step="1" inputmode="numeric" placeholder="Fx 320">
+        </label>
+
+        <div class="buttons">
+          <button id="saveBtn" class="primary">Gem</button>
+          <button id="showChartBtn">Vis graf</button>
+        </div>
+
+        <p class="hint">Skriv batteri i % og km bilen kan køre. Tryk Gem for at gemme et punkt.</p>
+      </section>
+
+      <section id="chartView" class="view hidden">
+        <div class="chartHeader">
+          <button id="backBtn">‹ Tilbage</button>
+          <h2>Historik</h2>
+        </div>
+        <canvas id="chartCanvas" width="600" height="300"></canvas>
+        <div id="entriesList" class="entries"></div>
+        <div class="buttons">
+          <button id="clearBtn" class="danger">Slet alle</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+  </div>
+</body>
+</html>
