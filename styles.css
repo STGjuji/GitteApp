@@ -14,7 +14,12 @@ body {
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica,
     Arial;
   background: linear-gradient(180deg, var(--bg) 0%, #071126 100%);
   color: var(--text);
@@ -106,6 +111,12 @@ button.danger {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+#chartCanvas {
+  width: 100%;
+  height: 220px; /* fixed render height to avoid auto-growing */
+  max-height: 300px;
+  display: block;
 }
 .chartHeader h2 {
   flex: 1;

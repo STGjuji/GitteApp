@@ -33,12 +33,34 @@ function switchView(toChart){
 
 function renderChart(){
   const entries = loadEntries()
-  const labels = entries.map(e=> new Date(e.t).toLocaleString())
+  const labels = entries.map(e=> new Date(e.t).toLocaleDateString())
   const percents = entries.map(e=> e.percent)
   const kms = entries.map(e=> e.km)
 
   const ctx = document.getElementById('chartCanvas').getContext('2d')
   if(chart) chart.destroy()
+  // create a small plugin that draws a date-stamp (last update) on the chart
+  const stampText = entries.length > 0
+    ? 'Opdateret: ' + new Date(entries[entries.length-1].t).toLocaleDateString()
+    : 'Opdateret: ' + new Date().toLocaleDateString()
+
+  const timestampPlugin = {
+    id: 'timestampPlugin',
+    afterDraw(chartInstance) {
+      const {ctx, chartArea} = chartInstance
+      if(!chartArea) return
+      ctx.save()
+      ctx.font = '12px system-ui, Arial'
+      ctx.fillStyle = 'rgba(0,0,0,0.6)'
+      const padding = 8
+      const text = stampText
+      const textWidth = ctx.measureText(text).width
+      const x = chartArea.right - textWidth - padding
+      const y = chartArea.bottom - padding
+      ctx.fillText(text, x, y)
+      ctx.restore()
+    }
+  }
 
   chart = new Chart(ctx, {
     type: 'line',
@@ -57,6 +79,7 @@ function renderChart(){
       },
       plugins: { legend:{position:'bottom'} }
     }
+    ,plugins: [timestampPlugin]
   })
 
   // populate list
@@ -65,7 +88,7 @@ function renderChart(){
   if(entries.length===0){ list.innerHTML = '<div class="entry">Ingen data endnu</div>' }
   entries.slice().reverse().forEach(e=>{
     const d = document.createElement('div'); d.className='entry'
-    d.innerHTML = `<div>${new Date(e.t).toLocaleString()}</div><div>${e.percent}% — ${e.km} KM</div>`
+    d.innerHTML = `<div>${new Date(e.t).toLocaleDateString()}</div><div>${e.percent}% — ${e.km} KM</div>`
     list.appendChild(d)
   })
 }
