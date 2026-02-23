@@ -4,7 +4,7 @@ let chart = null
 
 function loadEntries(){
   const raw = localStorage.getItem(LS_KEY)
-  return raw? JSON.parse(raw): []
+  return raw ? JSON.parse(raw) : []
 }
 function saveEntries(arr){
   localStorage.setItem(LS_KEY, JSON.stringify(arr))
@@ -95,6 +95,12 @@ function renderChart(){
 
 // events
 window.addEventListener('DOMContentLoaded', ()=>{
+  // register service worker if available (optional offline support)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => {
+      console.warn('Service worker registration failed:', err);
+    });
+  }
   const percentInput = document.getElementById('percentInput')
   const kmInput = document.getElementById('kmInput')
   document.getElementById('saveBtn').addEventListener('click', ()=>{
